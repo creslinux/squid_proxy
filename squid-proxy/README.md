@@ -1,6 +1,20 @@
 
 # Squid Proxy 
 
+Squid Proxy configuration based on https://github.com/salrashid123/squid_proxy but using the https://github.com/measurement-factory/squid/tree/SQUID-360-peering-for-SslBump fork/branch to build Squid with working support for `ssl_bump` and `cache_peer`. This particular configuration sets up a local squid-proxy cache which can inspect and cache HTTP and HTTPS requests (with MITM). It also uses `cache_peer` to forward the request to a third party proxy if the resouce with the URL isn't in the local cache. The third party proxy can be HTTP using the CONNECT verb and provide it's own self signed certificates too. This configuration is specfic to the Crawlera proxy but any other could be used instead by changing the `cache_peer` value in `squid.conf.intercept-cache`. The Dockerfile also install the certificate for Crawlera.
+
+Following is the original readme and instructions. To start this Squid instance simply run:
+
+```
+docker-compose up --build
+```
+
+To test the proxy from another Docker instance in the same `crawlnet` network:
+```
+curl -v --cacert /usr/share/ca-certificates/CA_crt.pem -x squid-proxy_proxy_1:3128 https://httpbin.org/ip
+```
+
+#### FROM THE ORIGINAL README
 
 Sample squid proxy and Dockerfile demonstrating various confg modes.
 

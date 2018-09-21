@@ -1,0 +1,18 @@
+version: '3.4'
+services:
+  proxy:
+    build: 
+      context: ./squid-proxy/
+    image: squid-proxy
+    hostname: squid-proxy
+    ports: 
+      - "3128:3128"
+    # entrypoint: "tail -f /dev/null" # use to keep the container open for debugging
+    entrypoint: ./init_and_run.sh
+    env_file:
+      - ./squid-proxy/.env
+
+networks:
+  default:
+    external:
+      name: crawlnet

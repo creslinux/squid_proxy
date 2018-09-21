@@ -11,7 +11,7 @@ docker-compose up --build
 
 To test the proxy from another Docker instance in the same `crawlnet` network:
 ```
-curl -v --cacert /usr/share/ca-certificates/CA_crt.pem -x squid-proxy_proxy_1:3128 https://httpbin.org/ip
+curl -v --cacert /usr/share/ca-certificates/CA_crt.pem -x squid_proxy_proxy_1:3128 https://httpbin.org/ip
 ```
 
 #### FROM THE ORIGINAL README

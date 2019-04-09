@@ -4,11 +4,10 @@ RUN apt-get install -y curl supervisor git openssl build-essential libssl-dev wg
 WORKDIR /apps/
 RUN wget -O SQUID-360-peering-for-SslBump.zip https://github.com/measurement-factory/squid/archive/SQUID-360-peering-for-SslBump.zip 
 RUN unzip SQUID-360-peering-for-SslBump.zip \
-    && CPU=$(( `nproc --all`-1 )) \
     && cd /apps/squid-SQUID-360-peering-for-SslBump/ \
     && ./bootstrap.sh \
     && ./configure --prefix=/apps/squid --enable-icap-client --enable-ssl --with-openssl --enable-ssl-crtd --enable-security-cert-generators=file --enable-auth --enable-basic-auth-helpers="NCSA" --with-default-user=nobody \
-    && make -j$CPU \
+    && make -j4 \
     && make install \
     && cd /apps \
     && rm -rf /apps/squid-SQUID-360-peering-for-SslBump

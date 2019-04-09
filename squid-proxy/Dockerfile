@@ -16,8 +16,6 @@ ADD . /apps/
 
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY crawlera-ca.crt /usr/local/share/ca-certificates/crawlera-ca.crt
-RUN update-ca-certificates
 
 RUN chmod +x /apps/init_and_run.sh
 
